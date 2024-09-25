@@ -22,8 +22,6 @@ class Process:
         Process_Error_Handler = None
         Process_SC_Helper = None
 
-    Game_Base_Address = None
-
 
 class Listener:
     Mouse = None
@@ -40,16 +38,6 @@ class KeyStatus:
 
 
 class GameParmas:
-    First_Person = 4
-    Third_Person = 0
-    Closed_Friend = 6
-    Session_State = 33
-    Session_Cache = 0
-    Health_Limit = 328
-    Status_True = 1
-    Status_False = 0
-    Online = 125
-    Entity_Self = 156
     Weapon_Mapping = {
         0: GameKeyBindings.Weapons.Pistol,
         1: GameKeyBindings.Weapons.Machine_gun,
@@ -60,7 +48,6 @@ class GameParmas:
         6: GameKeyBindings.Weapons.Heavy_weapon,
         7: GameKeyBindings.Weapons.Special_weapon
     }
-    Current_Weapon_Hash=0
     Is_Suspend=False
 
 
