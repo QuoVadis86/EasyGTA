@@ -1,4 +1,4 @@
-from threading import Thread, Timer
+from threading import Thread
 from Config import Listener, GameParmas, KeyStatus, Process
 from pynput import mouse, keyboard
 from KeyBindings import GameKeyBindings, KeyBoard, AppKeyBindings
@@ -25,24 +25,13 @@ def on_click(x, y, button, pressed):
             elif button == mouse.Button.x2:
                 KeyStatus.X2_Pressed = True
                 Thread(target=Scripts.speed_run).start()
-            elif button == mouse.Button.left:
-                KeyStatus.Left_Pressed = True
-                Thread(target=Scripts.reload_while_down).start()
+            else:
+                pass
         else:
             if button == mouse.Button.x2:
                 KeyStatus.X2_Pressed = False
             if button == mouse.Button.left:
                 KeyStatus.Left_Pressed = False
-
-
-def on_scroll(x, y, dx, dy):
-    if is_in_game():
-        delay_seconds = 0.5
-        Timer(delay_seconds, Scripts.scroll_weapon).start()
-
-
-def on_move(x, y):
-    pass
 
 
 def on_press(key):
@@ -59,10 +48,6 @@ def on_press(key):
                     and origin(key_v) != GameKeyBindings.Weapons.Melee_weapon
                 ):
                     GameKeyBindings.Weapons.Current_Weapon = origin(key_v)
-            elif key_v == KeyBoard.V:
-                Scripts.set_visual()
-            elif key_v == KeyBoard.C:
-                pass
         except AttributeError:
             if key == AppKeyBindings.Buy_Ammo:
                 Scripts.buy_ammo()
@@ -72,8 +57,6 @@ def on_press(key):
                 Scripts.start_egine()
             elif key == AppKeyBindings.Open_Snacks:
                 Scripts.open_snacks()
-            elif key == AppKeyBindings.Change_Session:
-                Scripts.change_session()
             elif key == AppKeyBindings.Idle:
                 Scripts.idle()
             elif key == AppKeyBindings.Jump:
@@ -85,13 +68,33 @@ def on_press(key):
             elif key == AppKeyBindings.Suspend:
                 GameParmas.Is_Suspend = not GameParmas.Is_Suspend
                 Thread(target=Scripts.suspend_game).start()
-            elif key == AppKeyBindings.Act3:
-                Scripts.act3()
-            elif key == AppKeyBindings.Act1_Act2:
-                Scripts.right_space()
             elif key == AppKeyBindings.Kill:
                 Thread(target=Scripts.kill_game).start()
-
+    else:
+            pass
+            # if key == AppKeyBindings.Heal:
+            #     Scripts.heal()
+            # elif key == AppKeyBindings.Buy_Ammo:
+            #     Scripts.buy_ammo()
+            # elif key == AppKeyBindings.Wear_Necklace:
+            #     Scripts.wear_necklace()
+            # elif key == AppKeyBindings.Start_Engine:
+            #     Scripts.start_egine()
+            # elif key == AppKeyBindings.Open_Snacks:
+            #     Scripts.open_snacks()
+            # elif key == AppKeyBindings.Idle:
+            #     Scripts.idle()
+            # elif key == AppKeyBindings.Jump:
+            #     if not KeyStatus.Space_Pressed:
+            #         Thread(target=Scripts.continuous_jump).start()
+            # elif key == AppKeyBindings.Heal:
+            #     if not KeyStatus.Tab_Pressed:
+            #         Thread(target=Scripts.heal).start()
+            # elif key == AppKeyBindings.Suspend:
+            #     GameParmas.Is_Suspend = not GameParmas.Is_Suspend
+            #     Thread(target=Scripts.suspend_game).start()
+            # elif key == AppKeyBindings.Kill:
+                # Thread(target=Scripts.kill_game).start()
 
 def on_release(key):
     if key == AppKeyBindings.Jump:
@@ -104,9 +107,7 @@ def init():
     print("开始初始化Listener")
     try:
         Listener.Keyboard = keyboard.Listener(on_press=on_press, on_release=on_release)
-        Listener.Mouse = mouse.Listener(
-            on_click=on_click, on_scroll=on_scroll, on_move=on_move
-        )
+        Listener.Mouse = mouse.Listener(on_click=on_click)
         Listener.Keyboard.start()
         Listener.Mouse.start()
         print("初始化完毕")
