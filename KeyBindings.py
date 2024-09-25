@@ -10,6 +10,7 @@ class GameKeyBindings:
         Health = "="
         Armo = "-"
         Menu = "m"
+        Franklin =Key.f10
 
     class Weapons:
         Weapon_list = Key.insert
@@ -24,6 +25,7 @@ class GameKeyBindings:
         Special_weapon = 3
 
         Current_Weapon = Pistol
+        Last_Weapon=Pistol
 
 
 class AppKeyBindings:
@@ -31,7 +33,6 @@ class AppKeyBindings:
     Wear_Necklace = Key.f4
     Start_Engine = Key.f5
     Open_Snacks = Key.f6
-    Change_Session = Key.f10
     Idle = Key.f11
     Suspend = Key.end
     Kill = Key.delete
