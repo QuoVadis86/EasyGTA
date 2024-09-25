@@ -6,6 +6,7 @@ class Process:
 
     class ProcessNames:
         Process_GTA = "GTA5.exe"
+        Process_BE="GTA5_BE.exe"
         Process_Launcher = "Launcher.exe"
         Process_Play_GTA5 = "PlayGTAV.exe"
         Process_Rockstar_Service = "RockstarService.exe"
@@ -14,6 +15,7 @@ class Process:
 
     class ProcessPids:
         Process_GTA = None
+        Process_BE=None
         Process_Launcher = None
         Process_Play_GTA5 = None
         Process_Rockstar_Service = None
