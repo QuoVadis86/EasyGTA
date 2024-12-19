@@ -6,3 +6,5 @@ dist/
 build/
 *.spec
 .venv
+.__pycache__
+pyproject.toml

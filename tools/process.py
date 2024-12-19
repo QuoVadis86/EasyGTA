@@ -37,3 +37,26 @@ def pid_init():
             continue
         pid = get_process_id_by_name(name)
         setattr(Config.Process.ProcessPids, key, pid)
+
+import psutil
+
+def is_process_suspended(pid):
+    try:
+        p = psutil.Process(pid)
+        status = p.status()
+        # Check if the process status indicates it's suspended.
+        # Note: The exact string for a suspended process can vary between OSes.
+        return status == psutil.STATUS_STOPPED or status == 'stopped'
+    except psutil.NoSuchProcess:
+        print("No process found with PID:", pid)
+        return False
+    except Exception as e:
+        print(f"An error occurred while checking process status: {e}")
+        return False
+
+# 使用方法：
+pid = Config.Process.ProcessPids.Process_GTA  # 假设这是您想检查的进程PID
+if is_process_suspended(pid):
+    print("进程已被挂起")
+else:
+    print("进程未被挂起")

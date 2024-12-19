@@ -1,5 +1,5 @@
 from os.path import join, dirname
-from KeyBindings import GameKeyBindings
+from conf.key_bindings import GameKeyBindings
 
 class Process:
     Game_Name = "Grand Theft Auto V"

@@ -1,7 +1,7 @@
 from threading import Thread
 from Config import Listener, GameParmas, KeyStatus, Process
 from pynput import mouse, keyboard
-from KeyBindings import GameKeyBindings, KeyBoard, AppKeyBindings
+from conf.key_bindings import GameKeyBindings, KeyBoard, AppKeyBindings
 import Scripts
 from pygetwindow import getActiveWindow
 

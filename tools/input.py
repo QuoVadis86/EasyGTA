@@ -1,7 +1,7 @@
 from time import sleep
 from Config import Process, Listener,AppParmas
 from pygetwindow import getActiveWindow, getAllTitles
-from KeyBindings import GameKeyBindings
+from conf.key_bindings import GameKeyBindings
 from Listener import restart as listerner_restart
 from tools.process import (
     suspend_process,

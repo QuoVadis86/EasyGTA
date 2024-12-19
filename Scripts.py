@@ -1,6 +1,6 @@
 from time import sleep
 import tools.Utils as Utils
-from KeyBindings import GameKeyBindings, KeyBoard
+from conf.key_bindings import GameKeyBindings, KeyBoard
 from Config import GameParmas, KeyStatus
 
 def tab():
