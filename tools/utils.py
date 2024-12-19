@@ -4,7 +4,7 @@ from Config import Process, Listener,AppParmas
 from pygetwindow import getActiveWindow, getAllTitles
 from KeyBindings import GameKeyBindings
 from Listener import restart as listerner_restart
-from Memory import (
+from tools.process import (
     suspend_process,
     kill_process,
     resume_process,
@@ -34,20 +34,6 @@ def origin(num):
 def is_in_game():
     if getActiveWindow() != None:
         return Process.Game_Name in getActiveWindow().title
-
-
-def kill():
-    kill_process()
-
-
-def suspend():
-    suspend_process()
-
-
-def resume():
-
-    resume_process()
-
 
 
 def press_and_release(key):

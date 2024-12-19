@@ -1,5 +1,5 @@
 from time import sleep
-import Utils
+import tools.Utils as Utils
 from KeyBindings import GameKeyBindings, KeyBoard
 from Config import GameParmas, KeyStatus
 

@@ -4,7 +4,7 @@ from PIL import Image
 
 # 假设这些函数来自外部模块
 
-from Utils import restart, exit_click
+from tools.Utils import restart, exit_click
 from Config import AppParmas
 
 
