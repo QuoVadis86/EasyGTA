@@ -1,20 +1,19 @@
 from conf.bindings import GameBindings as GB
-class Weapon:
-    def __init__(self):
-        # self.current=GB.Weapons.Pistol
-        # self.last=GB.Weapons.Pistol
-        # self.weapon_list = GB.Weapons.Weapon_list
-        # self.pistol = GB.Weapons.Pistol
-        # self.machine_gun = GB.Weapons.Machine_gun
-        self.rifle = 5
-        self.sniper = 7
-        self.melee_weapon = 1
-        self.hand = 9
-        self.shot_gun = 2
-        self.heavy_weapon = 4
-        self.special_weapon = 3
 
-    def set_current_weapon(self,weapon):
-        self.current=weapon
-    def set_last_weapon(self,weapon):
-        self.last=weapon
+class Weapon():
+    def __init__(self):
+        self.current=self.f(GB.Weapons.Pistol)
+        self.last=self.f(GB.Weapons.Pistol)
+        self.weapon_list = self.f(GB.Weapons.Weapon_list)
+        self.pistol = self.f(GB.Weapons.Pistol)
+        self.machine_gun = self.f(GB.Weapons.Machine_gun)
+        self.rifle = self.f(GB.Weapons.Rifle)
+        self.sniper = self.f(GB.Weapons.Sniper)
+        self.melee_weapon = self.f(GB.Weapons.Melee_weapon)
+        self.hand = self.f(GB.Weapons.Hand)
+        self.shot_gun = self.f(GB.Weapons.Shot_gun)
+        self.heavy_weapon = self.f(GB.Weapons.Heavy_weapon)
+        self.special_weapon = self.f(GB.Weapons.Special_weapon)
+
+    def f(self,key):
+        return key

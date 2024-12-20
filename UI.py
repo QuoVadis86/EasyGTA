@@ -4,7 +4,7 @@
 
 # # 假设这些函数来自外部模块
 
-# from entity.Utils import restart, exit_click
+# from scripts import restart, exit_click
 # from conf.Config import AppParmas
 
 

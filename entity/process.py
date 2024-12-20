@@ -3,7 +3,7 @@ from psutil import process_iter, Process, STATUS_STOPPED
 from conf.config import *
 
 
-class GTA:
+class GTA():
     def __init__(self):
         self.init_process()
 
@@ -45,20 +45,19 @@ class GTA:
         return None
 
     def init_process(self):
-        pass
-        #self.gta5 = self.get_pid_by_name(GTA5)
-        # self.be = self.get_pid_by_name(BE)
-        # self.launcher = self.get_pid_by_name(LAUNCHER)
-        # self.play_gta5 = self.get_pid_by_name(PLAY_GTA5)
-        # self.rockstar_service = self.get_pid_by_name(ROCKSTAR_SERVICE)
-        # self.error_handler = self.get_pid_by_name(ERROR_HANDLER)
-        # self.sc_helper = self.get_pid_by_name(SC_HELPER)
+        # pass
+        self.gta5 = self.get_pid_by_name(GTA5)
+        self.be = self.get_pid_by_name(BE)
+        self.launcher = self.get_pid_by_name(LAUNCHER)
+        self.play_gta5 = self.get_pid_by_name(PLAY_GTA5)
+        self.rockstar_service = self.get_pid_by_name(ROCKSTAR_SERVICE)
+        self.error_handler = self.get_pid_by_name(ERROR_HANDLER)
+        self.sc_helper = self.get_pid_by_name(SC_HELPER)
 
-    def is_suspended(pid):
+    def is_suspended(self,pid):
         try:
-            p = Process(pid)
-            status = p.status()
-            return status == STATUS_STOPPED or status == "stopped"
+            status = Process(pid).status()
+            return status == STATUS_STOPPED
         except Exception as e:
             print("No process found with PID:", e)
             return False
