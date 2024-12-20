@@ -1,142 +1,265 @@
 from time import sleep
-import tools.Utils as Utils
-from conf.bindings import GameKeyBindings, KeyBoard
-from conf.Config import GameParmas, KeyStatus
-
+from pygetwindow import getActiveWindow, getAllTitles
+from pynput import mouse,keyboard
+from threading import Thread
+from instance import *
+import instance
+from conf.bindings import AppBindings as AB
+from conf.bindings import GameBindings as GB
+from conf.bindings import KeyBoard as KB
+from conf.config import *
 def tab():
-    Utils.press_and_release(GameKeyBindings.Weapons.Weapon_list)
-    print('按下tab')
+    input.press_and_release(weapon.weapon_list)
+    print('按下武器选单')
 
 
 def auto_tab():
     sleep(0.1)
     tab()
 
-
-def hand():
-    Utils.special_press(GameKeyBindings.Weapons.Hand)
-
+def quick_hand():
+    input.press(weapon.special_weapon)
+    input.press(weapon.hand)
+    input.release(weapon.hand)
+    input.release(weapon.special_weapon)
+    
 
 def quick_current_weapon():
     if (
-        GameKeyBindings.Weapons.Current_Weapon == GameKeyBindings.Weapons.Melee_weapon
-        or GameKeyBindings.Weapons.Current_Weapon
-        == GameKeyBindings.Weapons.Hand
-        or GameKeyBindings.Weapons.Current_Weapon
-         == GameKeyBindings.Weapons.Special_weapon
+        weapon.current == weapon.melee_weapon
+        or weapon.current
+        == weapon.hand
+        or weapon.current
+         == weapon.special_weapon
     ):
-        GameKeyBindings.Weapons.Current_Weapon = GameKeyBindings.Weapons.Last_Weapon
-    Utils.special_press(GameKeyBindings.Weapons.Current_Weapon)
+        weapon.current = weapon.last
+    input.press(weapon.special_weapon)
+    input.press(weapon.current)
+    input.release(weapon.current)
+    input.release(weapon.special_weapon)
 
 
 def speed_run():
-    while KeyStatus.X2_Pressed:
+    while x2_pressed:
         tab()
     quick_current_weapon()
 
 
-def continuous_jump():
-            jump()
-            sleep(1)
+# def continuous_jump():
+#             jump()
+#             sleep(1)
 
-def jump():
-    print('跳跃里')
-    Utils.press_and_release(GameKeyBindings.Character.Jump)
+# def jump():
+#     print('跳跃里')
+#     inputpress_and_release(GB.Character.Jump)
 
-
+def origin(num):
+    return num - 48
+def is_in_game():
+    if getActiveWindow() != None:
+        return GAME_NAME in getActiveWindow().title
 def auto_esc():
-        Utils.press(GameKeyBindings.Character.Franklin)
+        input.press(GB.Character.Franklin)
         print('按下')
         sleep(0.2)
-        Utils.release(GameKeyBindings.Character.Franklin)
+        input.release(GB.Character.Franklin)
         print('弹起')
-        Utils.press_and_release(KeyBoard.Esc)
+        input.press_and_release(KB.Esc)
         print('退出')
 
 def buy_ammo():
-    Utils.ahk(GameKeyBindings.Character.Menu, delay=0.2)
-    Utils.ahk(KeyBoard.Up, 7)
-    Utils.ahk(KeyBoard.Enter, 2)
-    Utils.ahk(KeyBoard.Left)
-    Utils.ahk(KeyBoard.Down)
-    Utils.ahk(KeyBoard.Enter)
-    Utils.ahk(GameKeyBindings.Character.Menu, delay=0)
+    input.ahk(GB.Character.Menu, delay=0.2)
+    input.ahk(KB.Up, 7)
+    input.ahk(KB.Enter, 2)
+    input.ahk(KB.Left)
+    input.ahk(KB.Down)
+    input.ahk(KB.Enter)
+    input.ahk(GB.Character.Menu, delay=0)
 
 
 def wear_necklace():
-    Utils.ahk(GameKeyBindings.Character.Menu, delay=0.2)
-    Utils.ahk(KeyBoard.Up, 6)
-    Utils.ahk(KeyBoard.Enter)
-    Utils.ahk(KeyBoard.Down)
-    Utils.ahk(KeyBoard.Enter)
-    Utils.ahk(KeyBoard.Down, 6)
-    Utils.ahk(KeyBoard.Left)
-    Utils.ahk(GameKeyBindings.Character.Menu, delay=0)
+    input.ahk(GB.Character.Menu, delay=0.2)
+    input.ahk(KB.Up, 6)
+    input.ahk(KB.Enter)
+    input.ahk(KB.Down)
+    input.ahk(KB.Enter)
+    input.ahk(KB.Down, 6)
+    input.ahk(KB.Left)
+    input.ahk(GB.Character.Menu, delay=0)
 
 
 def start_egine():
-    Utils.ahk(GameKeyBindings.Character.Menu, delay=0.2)
-    Utils.ahk(KeyBoard.Up, 9)
-    Utils.ahk(KeyBoard.Enter)
-    Utils.ahk(KeyBoard.Up)
-    Utils.ahk(KeyBoard.Enter)
-    Utils.ahk(KeyBoard.Down, 2)
-    Utils.ahk(KeyBoard.Enter)
-    Utils.ahk(KeyBoard.Down, 4)
-    Utils.ahk(KeyBoard.Enter, 2)
-    Utils.ahk(GameKeyBindings.Character.Menu, delay=0)
+    input.ahk(GB.Character.Menu, delay=0.2)
+    input.ahk(KB.Up, 9)
+    input.ahk(KB.Enter)
+    input.ahk(KB.Up)
+    input.ahk(KB.Enter)
+    input.ahk(KB.Down, 2)
+    input.ahk(KB.Enter)
+    input.ahk(KB.Down, 4)
+    input.ahk(KB.Enter, 2)
+    input.ahk(GB.Character.Menu, delay=0)
 
 
 def open_snacks():
     
-        Utils.ahk(GameKeyBindings.Character.Menu, delay=0.2)
-        Utils.ahk(KeyBoard.Up, 7)
-        Utils.ahk(KeyBoard.Enter)
-        Utils.ahk(KeyBoard.Down, 2)
-        Utils.ahk(KeyBoard.Enter)
+        input.ahk(GB.Character.Menu, delay=0.2)
+        input.ahk(KB.Up, 7)
+        input.ahk(KB.Enter)
+        input.ahk(KB.Down, 2)
+        input.ahk(KB.Enter)
 
 
 def act3():
-        Utils.press(KeyBoard.Down)
-        Utils.press(KeyBoard.Right)
+        input.press(KB.Down)
+        input.press(KB.Right)
         sleep(0.005)
-        Utils.press(KeyBoard.Space)
+        input.press(KB.Space)
         sleep(0.005)
-        Utils.release(KeyBoard.Space)
-        Utils.release(KeyBoard.Down)
-        Utils.release(KeyBoard.Right)
+        input.release(KB.Space)
+        input.release(KB.Down)
+        input.release(KB.Right)
 
 
 def right_space():
-        Utils.press(KeyBoard.Right)
+        input.press(KB.Right)
         sleep(0.005)
-        Utils.press(KeyBoard.Space)
+        input.press(KB.Space)
         sleep(0.005)
-        Utils.release(KeyBoard.Space)
-        Utils.release(KeyBoard.Right)
+        input.release(KB.Space)
+        input.release(KB.Right)
 
 
 def idle():
-        Utils.press(GameKeyBindings.Character.Look_back)
+        input.press(GB.Character.Look_back)
 
 
 def kill_game():
-       Utils.kill()
-       Utils.auto_reload()
+       process.kill_process(process.gta5)
+       process.kill_process(process.be)
+       process.kill_process(process.launcher)
+       process.kill_process(process.play_gta5)
+       process.kill_process(process.rockstar_service)
+       process.kill_process(process.error_handler)
+       process.kill_process(process.sc_helper)
 
 
 def suspend_game():
-    if GameParmas.Is_Suspend:
-        Utils.suspend()
-        for i in range(100):
-            if GameParmas.Is_Suspend:
-                sleep(0.08)
-            else:
+    if not process.is_suspended(process.gta5):
+        # process.resume_process(process.gta5)
+        process.suspend_process(process.gta5)
+        for _ in range(100):
+            if not process.is_suspended(process.gta5):
                 break
-        Utils.resume()
-        GameParmas.Is_Suspend = False
+            sleep(0.08)
+    process.resume_process(process.gta5)
 
+
+
+def auto_reload():  # 自动重启脚本
+    print('等待十秒')
+    sleep(10)
+    print('等待完毕')
+    # print(Process.Game_Name in getAllTitles())
+    while not GAME_NAME in getAllTitles():
+        sleep(3)
+        print('准备重启中....')
+    print('重新初始化')
+    process.init_process()
+    listener.restart()
 
 def heal():
         print('heal')
-        Utils.press_and_release('c')
+        input.press_and_release('c')
+
+def on_click(x, y, button, pressed):
+        if is_in_game():
+            if pressed:
+                if button == mouse.Button.x1:
+                    Thread(target=quick_hand).start()
+                elif button == mouse.Button.x2:
+                    instance.x2_pressed = True
+                    Thread(target=speed_run).start()
+                else:
+                    pass
+            else:
+                if button == mouse.Button.x2:
+                    instance.x2_pressed = False
+                if button == mouse.Button.left:
+                    instance.left_pressed = False
+
+
+def on_press(key):
+    if is_in_game():
+        try:
+            key_v = key.vk
+            if (
+                0 <= origin(key_v) <= 9
+                and origin(key_v) != weapon.special_weapon
+            ):
+                auto_tab()
+                if (
+                    origin(key_v) != weapon.hand
+                    and origin(key_v) != weapon.melee_weapon
+                ):
+                    weapon.current = origin(key_v)
+        except AttributeError:
+            if key == AB.Buy_Ammo:
+                buy_ammo()
+            elif key == AB.Wear_Necklace:
+                wear_necklace()
+            elif key == AB.Start_Engine:
+                start_egine()
+            elif key == AB.Open_Snacks:
+                open_snacks()
+            elif key == AB.Idle:
+                idle()
+            # elif key == AB.Jump:
+            #     if not instance.space_pressed:
+            #         Thread(target=continuous_jump).start()
+            # elif key == AB.Heal:
+            #     if not KeyStatus.Tab_Pressed:
+            #         Thread(target=heal).start()
+            elif key == AB.Suspend:
+                Thread(target=suspend_game).start()
+            elif key == AB.Kill:
+                Thread(target=kill_game).start()
+    else:
+            print(key)
+            pass
+            # if key == AB.Heal:
+            #     heal()
+            # elif key == AB.Buy_Ammo:
+            #     buy_ammo()
+            # elif key == AB.Wear_Necklace:
+            #     wear_necklace()
+            # elif key == AB.Start_Engine:
+            #     start_egine()
+            # elif key == AB.Open_Snacks:
+            #     open_snacks()
+            # elif key == AB.Idle:
+            #     idle()
+            # elif key == AB.Jump:
+            #     if not KeyStatus.Space_Pressed:
+            #         Thread(target=continuous_jump).start()
+            # elif key == AB.Heal:
+            #     if not KeyStatus.Tab_Pressed:
+            #         Thread(target=heal).start()
+            # elif key == AB.Suspend:
+            #     GameParmas.Is_Suspend = not GameParmas.Is_Suspend
+            #     Thread(target=suspend_game).start()
+            # elif key == AB.Kill:
+                # Thread(target=kill_game).start()
+def on_release(key):
+    # if key == AB.Jump:
+    #     KeyStatus.Space_Pressed = False
+    if key == AB.Instant_Stop:
+        auto_esc()
+
+# def exit_click():
+#     AppParmas.Icon.stop()
+#     try:
+#         Listener.Keyboard.stop()
+#         Listener.Mouse.stop()
+#     except Exception as e:
+#         print("销毁Listener时发生异常:", e)

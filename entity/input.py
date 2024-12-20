@@ -1,9 +1,9 @@
 from time import sleep
 from pynput import keyboard, mouse
 
-
 class Input:
     def __init__(self):
+        print('初始化键盘')
         self.keyboard = keyboard.Controller()
         self.mouse = mouse.Controller()
 
@@ -21,3 +21,6 @@ class Input:
         for i in range(times):
             self.press_and_release(key)
             sleep(delay)
+    
+
+

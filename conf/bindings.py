@@ -13,7 +13,7 @@ class GameBindings:
         Franklin =Key.f10
 
     class Weapons:
-        Weapon_list = Key.insert
+        # Weapon_list = Key.insert
         Pistol = 6
         Machine_gun = 8
         Rifle = 5
