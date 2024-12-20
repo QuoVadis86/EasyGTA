@@ -1,40 +1,25 @@
 
 from time import sleep
-from Config import Process, Listener,AppParmas
 from pygetwindow import getActiveWindow, getAllTitles
-from conf.key_bindings import GameKeyBindings
 from Listener import restart as listerner_restart
-from .process import pid_init
 
-from pynput import keyboard, mouse
+from ..conf.bindings import GameBindings as GB
+from ..conf.config import Names
 
-def init():
-    Listener.Keyboard_Controller = keyboard.Controller()
-    Listener.Mouse_Controller = mouse.Controller()
+from .weapon import Weapon
+from .input import Input
+from .process import GTA5
 
-def set_current_weapon(weapon):
-    GameKeyBindings.Weapons.Current_Weapon=weapon
-def current_weapon():
-    return GameKeyBindings.Weapons.Current_Weapon
-
-def set_last_weapon(weapon):
-    GameKeyBindings.Weapons.Last_Weapon=weapon
-def last_weapon():
-    return GameKeyBindings.Weapons.Last_Weapon
-
+controller=Input()
+gta5=GTA5()
 
 def origin(num):
     return num - 48
-
-
 def is_in_game():
     if getActiveWindow() != None:
-        return Process.Game_Name in getActiveWindow().title
+        return Names.GAME_NAME in getActiveWindow().title
 
 
-def press_and_release(key):
-    Listener.Keyboard_Controller.press(key)
-    Listener.Keyboard_Controller.release(key)
 
 def special_press(key):
     press(keyboard.KeyCode.from_char(GameKeyBindings.Weapons.Special_weapon))
@@ -42,18 +27,6 @@ def special_press(key):
     release(keyboard.KeyCode.from_char(key))
     release(keyboard.KeyCode.from_char(GameKeyBindings.Weapons.Special_weapon))
 
-def press(key):
-    Listener.Keyboard_Controller.press(key)
-
-
-def release(key):
-    Listener.Keyboard_Controller.release(key)
-
-
-def ahk(key, times=1, delay=0.02):
-    for i in range(times):
-        press_and_release(key)
-    sleep(delay)
 
 
 def restart():

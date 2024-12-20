@@ -1,62 +1,73 @@
-from psutil import process_iter, Process
-import Config
+from psutil import iter, Process,STATUS_STOPPED
 
-def suspend_process():
-    try:
-        Process(Config.Process.ProcessPids.Process_GTA).suspend()
-    except Exception as e:
-        print(f"Error suspending process: {e}")
+from ..conf.config import Names
+
+class GTA5:
+    def __init__(self):
+        self.game_name = Names.GAME_NAME
+        self.gta5 = self.get_pid_by_name(Names.GTA5)
+        self.be = self.get_pid_by_name(Names.BE)
+        self.launcher = self.get_pid_by_name(Names.LAUNCHER)
+        self.play_gta5 = self.get_pid_by_name(Names.PLAY_GTA5)
+        self.rockstar_service = self.get_pid_by_name(Names.ROCKSTAR_SERVICE)
+        self.error_handler = self.get_pid_by_name(Names.ERROR_HANDLER)
+        self.sc_helper = self.get_pid_by_name(Names.SC_HELPER)
+
+    def suspend_process(self,pid:int):
+        try:
+            Process(pid).suspend()
+            print(f"进程已挂起")
+        except Exception as e:
+            print(f"无法挂起进程: {e}")
 
 
-def resume_process():
-    try:
-        Process(Config.Process.ProcessPids.Process_GTA).resume()
-    except Exception as e:
-        print(f"Error resumeing process: {e}")
+    def resume_process(self,pid:int):
+        try:
+            Process(pid).resume()
+            print(f"进程已恢复")
+        except Exception as e:
+            print(f"无法恢复进程: {e}")
 
 
-def kill_process():
-    try:
-        for name, pid in vars(Config.Process.ProcessPids).items():
-            if name == "Process_Rockstar_Service" or name.startswith("__"):
-                continue
+    def kill_process(self,pid:int):
+        try:
             Process(pid).terminate()
             print(f"进程已结束")
-    except Exception as ex:
-        print(f"无法结束进程{ex}")
-        
-def get_process_id_by_name(process_name):
-    for process in process_iter(["pid", "name"]):
-        if process.info["name"] == process_name:
-            return process.info["pid"]
-    return None
+        except Exception as ex:
+            print(f"无法结束进程{ex}")
+            
+    def get_pid_by_name(self,name:str):
+        for process in iter(["pid", "name"]):
+            if process.info["name"] == name:
+                print(f"进程{name}的pid为: {process.info["pid"]}")
+                return process.info["pid"]
+        print("没有找到该进程")
+        return None
 
-def pid_init():
-    for key, name in vars(Config.Process.ProcessNames).items():
-        if key.startswith("__"):
-            continue
-        pid = get_process_id_by_name(name)
-        setattr(Config.Process.ProcessPids, key, pid)
+# def pid_init():
+#     for key, name in vars(Config.Process.ProcessNames).items():
+#         if key.startswith("__"):
+#             continue
+#         pid = get_id_by_name(name)
+#         setattr(Config.Process.ProcessPids, key, pid)
 
-import psutil
 
-def is_process_suspended(pid):
+
+def is_suspended(pid):
     try:
-        p = psutil.Process(pid)
+        p = Process(pid)
         status = p.status()
-        # Check if the process status indicates it's suspended.
-        # Note: The exact string for a suspended process can vary between OSes.
-        return status == psutil.STATUS_STOPPED or status == 'stopped'
-    except psutil.NoSuchProcess:
-        print("No process found with PID:", pid)
-        return False
+        return status == STATUS_STOPPED or status == 'stopped'
     except Exception as e:
-        print(f"An error occurred while checking process status: {e}")
+        print("No process found with PID:", e)
         return False
 
-# 使用方法：
-pid = Config.Process.ProcessPids.Process_GTA  # 假设这是您想检查的进程PID
-if is_process_suspended(pid):
-    print("进程已被挂起")
-else:
-    print("进程未被挂起")
+# def kill_process(pid:int):
+#     try:
+#         for name, pid in vars(Config.Process.ProcessPids).items():
+#             if name == "Rockstar_Service" or name.startswith("__"):
+#                 continue
+#             Process(pid).terminate()
+#             print(f"进程已结束")
+#     except Exception as ex:
+#         print(f"无法结束进程{ex}")

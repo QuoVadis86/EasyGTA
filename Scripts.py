@@ -1,7 +1,7 @@
 from time import sleep
 import tools.Utils as Utils
-from conf.key_bindings import GameKeyBindings, KeyBoard
-from Config import GameParmas, KeyStatus
+from conf.bindings import GameKeyBindings, KeyBoard
+from conf.Config import GameParmas, KeyStatus
 
 def tab():
     Utils.press_and_release(GameKeyBindings.Weapons.Weapon_list)

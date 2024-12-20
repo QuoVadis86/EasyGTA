@@ -1,7 +1,7 @@
+#按键绑定配置文件
 from pynput.keyboard import Key
 
-
-class GameKeyBindings:
+class GameBindings:
 
     class Character:
         Look_back = "c"
@@ -24,11 +24,8 @@ class GameKeyBindings:
         Heavy_weapon = 4
         Special_weapon = 3
 
-        Current_Weapon = Pistol
-        Last_Weapon=Pistol
 
-
-class AppKeyBindings:
+class AppBindings:
     Buy_Ammo = Key.f3
     Wear_Necklace = Key.f4
     Start_Engine = Key.f5
