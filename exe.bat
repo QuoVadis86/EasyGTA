@@ -1,1 +1,1 @@
-pyinstaller --onefile --noconsole --icon=icon.ico --add-data "icon.png;." main.py 
+pyinstaller --onefile -w --icon=./png/icon.ico --add-data "./templates;templates" main.py
