@@ -1,5 +1,3 @@
-from scripts import init
-init()
-
-# from entity.listener import Listener
-# Listener(None,None,None)
+from app.ui import init
+if __name__ == '__main__':
+    init()
