@@ -23,6 +23,7 @@ class KeyBoard:
     Right = Key.right
     Enter = Key.enter
     Back = Key.backspace
+    Del=Key.delete
 
 class Mouse:
    

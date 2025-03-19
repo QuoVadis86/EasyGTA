@@ -4,8 +4,8 @@ import run
 from PIL import Image
 
 # # 假设这些函数来自外部模块
-from tools.utils import restart_listener
-# from scripts import restart, exit_click
+# from tools.utils import restart_listener
+from scripts import restart, exit_app
 # from conf.Config import AppParmas
 
 
@@ -18,8 +18,8 @@ def test():
     # 重新创建菜单项
     menu = Menu(
         # MenuItem(f"测试 : {value} (点击刷新)", test),
-        MenuItem("重新加载", restart_listener),
-        # MenuItem("退出", exit_click)
+        MenuItem("重新加载", restart),
+        MenuItem("退出", exit_app)
     )
     run.icon.menu = menu
 
@@ -31,8 +31,8 @@ def create_ui():
     # 初始菜单项
     menu_items = [
         # MenuItem(f"测试 : {value} (点击刷新)", test),
-        MenuItem("重新加载", restart_listener),
-        # MenuItem("退出", exit_click)
+        MenuItem("重新加载", restart),
+        MenuItem("退出", exit_app)
     ]
 
     menu = Menu(*menu_items)
@@ -43,4 +43,3 @@ def create_ui():
 
 def init():
     Thread(target=create_ui).start()
-

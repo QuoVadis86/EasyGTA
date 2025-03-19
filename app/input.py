@@ -2,7 +2,7 @@ from threading import Thread
 from time import sleep
 from pynput import keyboard, mouse
 import logging
-from scripts import start_egine
+from scripts import start_egine,exit_app
 from conf.binding import App as AB, KeyBoard as KB,Mouse as MB
 class Controller():
     def __init__(self):
@@ -43,6 +43,7 @@ class Listener():
     def start(self):
         self.keyboard.start()
         self.mouse.start()
+        logging.info("监听器已启动")
         self.keyboard.join()
         self.mouse.join()
  
@@ -50,6 +51,7 @@ class Listener():
     def destroy(self):
         self.keyboard.stop()
         self.mouse.stop()
+        logging.info("监听器已销毁")
 
     def restart(self):
         self.destroy()
@@ -74,10 +76,15 @@ def on_press(key):
         try:
             key_v = key.vk
             # print(key.vk)
+            print(key)
             
         except AttributeError:
+            print(key)
             if key == AB.Start_Engine:
-                Thread(target=start_egine).start()
+              start_egine()
+            if key==KB.Del:
+                exit_app()
+                 
     # else:
     #     # print(key)
 
