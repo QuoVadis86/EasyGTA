@@ -35,7 +35,7 @@ class Listener():
         logging.info("初始化监听器")
        
     def initializes(self):
-        self.keyboard= keyboard.Listener(on_press)
+        self.keyboard= keyboard.Listener(on_press=on_press)
         self.mouse= mouse.Listener(on_click=on_click)
 
 
@@ -44,8 +44,8 @@ class Listener():
         self.keyboard.start()
         self.mouse.start()
         logging.info("监听器已启动")
-        self.keyboard.join()
-        self.mouse.join()
+        # self.keyboard.join()
+        # self.mouse.join()
  
 
     def destroy(self):

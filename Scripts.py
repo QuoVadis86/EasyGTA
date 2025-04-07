@@ -19,7 +19,17 @@ def start_egine():
     run.controller.ahk(GB.Menu, delay=0)
 
 def exit_app():
+    run.icon.stop()
+    
    
 
 def restart():
+    run.listener.restart()
+    # run.icon.stop()
+    # run.icon.run()
+   
+
+def pause():
+    run.listener.destroy()
+    
     
