@@ -1,5 +1,5 @@
 from conf.config import PROCESS, GTA5
-from tools.process import *
+from .tools.process import *
 
 class GTA5():
     def __init__(self):

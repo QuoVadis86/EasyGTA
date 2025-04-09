@@ -1,5 +1,5 @@
 import run
-from app import ui,demo
+from app import ui
 from app.gta5 import GTA5
 from app.input import Listener
 from app.input import Controller

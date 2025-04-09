@@ -2,8 +2,9 @@ from threading import Thread
 from time import sleep
 from pynput import keyboard, mouse
 import logging
-from scripts import start_egine,exit_app
+from scripts import start_egine,exit_app,suspend_gta,kill_gta,limit_net,block_net
 from conf.binding import App as AB, KeyBoard as KB,Mouse as MB
+from conf.config import load_config
 class Controller():
     def __init__(self):
         self.keyboard = keyboard.Controller()
@@ -35,8 +36,9 @@ class Listener():
         logging.info("初始化监听器")
        
     def initializes(self):
-        self.keyboard= keyboard.Listener(on_press=on_press)
-        self.mouse= mouse.Listener(on_click=on_click)
+        self.keyboard= keyboard.Listener(on_press=self.on_press)
+        self.mouse= mouse.Listener(on_click=self.on_click)
+        self.config=load_config()
 
 
 
@@ -58,36 +60,60 @@ class Listener():
         self.initializes()
         self.start()
 
-def on_click(x, y, button, pressed):
+    def on_click(self,x, y, button, pressed):
         # if game_focused():
             if pressed:
-                if button ==AB.Start_Engine:
-                    Thread(target=start_egine).start()
-                else:
-                    pass
+                print(button.name)
+                if button.name == format(self.config.get("start_engine")):
+                    print("start_engine")
+                if button.name == format(self.config.get("kill_gta")):
+                    print("kill_gta")
+                if button.name == format(self.config.get("suspend_gta")):
+                    print("suspend_gta")
+                if button.name == format(self.config.get("block_net")):
+                    print("block_net")
+                if button.name == format(self.config.get("limit_net")):
+                    print("limit_net")
+                pass
+                # if button ==AB.Start_Engine:
+                #     Thread(target=start_egine).start()
+                # else:
+                #     pass
         # else:
             # pass
             # print(button)
-             
+                
 
-def on_press(key):
-    
+    def on_press(self,key):
+
     # if game_focused():
         try:
+            pass
             key_v = key.vk
-            # print(key.vk)
-            print(key)
+            print(key.__dict__)
+            # print(key)
+            # print(config.get("Start_Engine"))
             
         except AttributeError:
-            print(key)
-            if key == AB.Start_Engine:
-              start_egine()
+        
+            if key.name == format(self.config.get("start_engine")):
+                print("start_engine")
+                # start_egine()
+            if key.name == format(self.config.get("kill_gta")):
+                print("kill_gta")
+            if key.name == format(self.config.get("suspend_gta")):
+                print("suspend_gta")
+            if key.name == format(self.config.get("block_net")):
+                print("block_net")
+            if key.name == format(self.config.get("limit_net")):
+                print("limit_net")
             if key==KB.Del:
                 exit_app()
-                 
+                    
     # else:
     #     # print(key)
-
+def format(key:str)->str:
+    return key.split(".")[-1].lower()
 
 if __name__ == "__main__":
     # Listener()

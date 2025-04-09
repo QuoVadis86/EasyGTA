@@ -1,0 +1,8 @@
+{
+    "start_engine": "Button.x1",
+    "suspend_gta": "Key.end",
+    "kill_gta": "Key.delete",
+    "reload_app": "Key.f6",
+    "limit_net": "Key.f7",
+    "block_net": "Key.f8"
+}

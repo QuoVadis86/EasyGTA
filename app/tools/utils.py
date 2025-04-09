@@ -23,3 +23,7 @@ def reload_app():  # 自动重启脚本
 def restart_listener():
     run.listener.restart()
 
+
+def format(key):
+    return str(key).split(".")[-1].capitalize()
+

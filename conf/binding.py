@@ -1,17 +1,20 @@
-#按键绑定配置文件
+# 按键绑定配置文件
 from pynput.keyboard import Key
 from pynput.mouse import Button
+
+
 class Game:
     Menu = "m"
 
 
 class App:
-  
-    Start_Engine = Key.f5
-    Suspend = Key.end
-    Kill = Key.delete
-    Reload_App = Key.f6
-    Net_Limit=Key.f7
+
+    start_engine = Key.f5
+    suspend_gta = Key.end
+    kill_gta = Key.delete
+    reload_app = Key.f6
+    limit_net = Key.f7
+    block_net = Key.f8
 
 
 class KeyBoard:
@@ -23,9 +26,10 @@ class KeyBoard:
     Right = Key.right
     Enter = Key.enter
     Back = Key.backspace
-    Del=Key.delete
+    Del = Key.delete
+
 
 class Mouse:
-   
-    X1 =Button.x1
+
+    X1 = Button.x1
     X2 = Button.x2
