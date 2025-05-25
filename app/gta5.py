@@ -1,4 +1,5 @@
-from conf.config import PROCESS, GTA5
+from time import sleep
+from conf.config import PROCESS, GTA
 from .tools.process import *
 
 class GTA5():
@@ -12,11 +13,16 @@ class GTA5():
             self.pids[name]=pid
 
     def suspend(self):
-        suspend_process(self.pids[GTA5])
+        print(self.pids)
+        if not is_suspended(self.pids[GTA]):
+            suspend_process(self.pids[GTA])
+            sleep(8)
+            resume_process(self.pids[GTA])
+        resume_process(self.pids[GTA])
 
 
     def resume(self):
-        resume_process(self.pids[GTA5])
+        resume_process(self.pids[GTA])
        
 
     def kill(self):

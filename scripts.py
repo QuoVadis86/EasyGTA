@@ -5,7 +5,7 @@ from conf.binding import KeyBoard as KB
 from conf.binding import App as AB
 from conf.config import load_config
 from pystray import Icon, Menu, MenuItem
-from app.tools.utils import format
+from app.tools.utils import format,reload_app
 def start_egine():
     run.controller.ahk(GB.Menu, delay=0.2)
     run.controller.ahk(KB.Up, 9)
@@ -22,27 +22,23 @@ def suspend_gta():
     run.gta5.suspend()
 def kill_gta():
     run.gta5.kill()
+    reload_app()
+    
 def exit_app():
     run.icon.stop()
 def limit_net():
-    run.gta5.limit_net()
+    pass
+    # run.gta5.limit_net()
 def block_net():
-    run.gta5.block_net()
+    pass
+    # run.gta5.block_net()
 
 def restart():
     run.listener.restart()
     update_app()
 
-    # run.icon.stop()
-    # run.icon.run()
-   
-
 def pause():
     run.listener.destroy()
-    
-
-# def format(key):
-#     return str(key).split(".")[-1].capitalize()
     
 def update_app():
     binding=load_config()

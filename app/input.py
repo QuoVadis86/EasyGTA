@@ -5,6 +5,7 @@ import logging
 from scripts import start_egine,exit_app,suspend_gta,kill_gta,limit_net,block_net
 from conf.binding import App as AB, KeyBoard as KB,Mouse as MB
 from conf.config import load_config
+from app.tools.utils import game_focused
 class Controller():
     def __init__(self):
         self.keyboard = keyboard.Controller()
@@ -63,17 +64,23 @@ class Listener():
     def on_click(self,x, y, button, pressed):
         # if game_focused():
             if pressed:
-                print(button.name)
+                # print(button.name)
                 if button.name == format(self.config.get("start_engine")):
                     print("start_engine")
+                    start_egine
                 if button.name == format(self.config.get("kill_gta")):
                     print("kill_gta")
+                    kill_gta()
                 if button.name == format(self.config.get("suspend_gta")):
                     print("suspend_gta")
+                    Thread(target=suspend_gta).start()
+                    # suspend_gta()
                 if button.name == format(self.config.get("block_net")):
                     print("block_net")
+                    block_net()
                 if button.name == format(self.config.get("limit_net")):
                     print("limit_net")
+                    limit_net()
                 pass
                 # if button ==AB.Start_Engine:
                 #     Thread(target=start_egine).start()
@@ -85,33 +92,39 @@ class Listener():
                 
 
     def on_press(self,key):
-
-    # if game_focused():
         try:
-            pass
-            key_v = key.vk
-            print(key.__dict__)
-            # print(key)
-            # print(config.get("Start_Engine"))
+        # if game_focused():
+            # print(key.__dict__)
+            # try:
+            #     pass
+            #     # key_v = key.vk
+            #     # print(key.__dict__)
+            #     # print(key)
+            #     # print(config.get("Start_Engine"))
+                
+            # except AttributeError:
+                # print(key.name)
+                # print(self.config)
             
-        except AttributeError:
-        
-            if key.name == format(self.config.get("start_engine")):
+            if  format(key.name) == format(self.config.get("start_engine")):
                 print("start_engine")
-                # start_egine()
-            if key.name == format(self.config.get("kill_gta")):
+                start_egine()
+            if  format(key.name) == format(self.config.get("kill_gta")):
                 print("kill_gta")
-            if key.name == format(self.config.get("suspend_gta")):
+                kill_gta()
+            if  format(key.name) == format(self.config.get("suspend_gta")):
                 print("suspend_gta")
-            if key.name == format(self.config.get("block_net")):
+                Thread(target=suspend_gta).start()
+            if  format(key.name) == format(self.config.get("block_net")):
                 print("block_net")
-            if key.name == format(self.config.get("limit_net")):
+                block_net()
+            if  format(key.name) == format(self.config.get("limit_net")):
                 print("limit_net")
-            if key==KB.Del:
-                exit_app()
-                    
-    # else:
-    #     # print(key)
+                limit_net()
+        except AttributeError:
+            pass
+        # else:
+        #     # print(key)
 def format(key:str)->str:
     return key.split(".")[-1].lower()
 
