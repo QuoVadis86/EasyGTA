@@ -2,3 +2,4 @@ pynput
 pygetwindow
 psutil
 pystray
+pyinstaller

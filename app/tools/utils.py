@@ -1,7 +1,7 @@
 
 import run
 from pygetwindow import getActiveWindow, getAllTitles
-from conf.config import GAME_NAME
+from config.config import GAME_NAME
 from time import sleep
 
 def game_focused():

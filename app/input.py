@@ -3,8 +3,8 @@ from time import sleep
 from pynput import keyboard, mouse
 import logging
 from scripts import start_egine,exit_app,suspend_gta,kill_gta,limit_net,block_net
-from conf.binding import App as AB, KeyBoard as KB,Mouse as MB
-from conf.config import load_config
+from config.binding import App as AB, KeyBoard as KB,Mouse as MB
+from config.config import load_config
 from app.tools.utils import game_focused
 class Controller():
     def __init__(self):
@@ -37,9 +37,10 @@ class Listener():
         logging.info("初始化监听器")
        
     def initializes(self):
-        self.keyboard= keyboard.Listener(on_press=self.on_press)
+        self.keyboard= keyboard.Listener(on_press=self.on_press,on_release=self.on_release)
         self.mouse= mouse.Listener(on_click=self.on_click)
         self.config=load_config()
+        print("---------->",self.config)
 
 
 
@@ -64,10 +65,9 @@ class Listener():
     def on_click(self,x, y, button, pressed):
         # if game_focused():
             if pressed:
-                # print(button.name)
                 if button.name == format(self.config.get("start_engine")):
                     print("start_engine")
-                    start_egine
+                    start_egine()
                 if button.name == format(self.config.get("kill_gta")):
                     print("kill_gta")
                     kill_gta()
@@ -81,6 +81,13 @@ class Listener():
                 if button.name == format(self.config.get("limit_net")):
                     print("limit_net")
                     limit_net()
+                if  format(button.name) == format(self.config.get("hack_speed")):
+                    print("hack_speed")
+                    limit_net()
+                if  format(button.name) == format(self.config.get("eat_snack")):
+                    print("eat_snack")
+                if  format(button.name) == format(self.config.get("select_unarmed")):
+                    print("select_unarmed")
                 pass
                 # if button ==AB.Start_Engine:
                 #     Thread(target=start_egine).start()
@@ -105,6 +112,7 @@ class Listener():
             # except AttributeError:
                 # print(key.name)
                 # print(self.config)
+            # print(key.__dict__)
             
             if  format(key.name) == format(self.config.get("start_engine")):
                 print("start_engine")
@@ -121,10 +129,28 @@ class Listener():
             if  format(key.name) == format(self.config.get("limit_net")):
                 print("limit_net")
                 limit_net()
+            if  format(key.name) == format(self.config.get("hack_speed")):
+                print("hack_speed")
+                limit_net()
+            if  format(key.name) == format(self.config.get("eat_snack")):
+                print("eat_snack")
+            if  format(key.name) == format(self.config.get("select_unarmed")):
+                print("select_unarmed")
         except AttributeError:
+            if 48<=key.vk<=57:
+                if key.vk==int(self.config.get("special_weapon")):
+                    return
+                
+            print(key.vk)
+            print(int(self.config.get("unarmed")))
+            print(keyboard.KeyCode.from_vk(int(self.config.get("unarmed"))))
+            # print(self.config.get("unarmed"))
+            # print(self.config.get())
             pass
         # else:
         #     # print(key)
+    def on_release(self,key):
+        pass
 def format(key:str)->str:
     return key.split(".")[-1].lower()
 

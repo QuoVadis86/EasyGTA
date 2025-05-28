@@ -1,9 +1,10 @@
-
+from pynput.keyboard import KeyCode
+from pynput import keyboard
 import run
-from conf.binding import Game as GB
-from conf.binding import KeyBoard as KB
-from conf.binding import App as AB
-from conf.config import load_config
+from config.binding import Game as GB
+from config.binding import KeyBoard as KB
+from config.binding import App as AB
+from config.config import load_config
 from pystray import Icon, Menu, MenuItem
 from app.tools.utils import format,reload_app
 def start_egine():
@@ -17,12 +18,22 @@ def start_egine():
     run.controller.ahk(KB.Down, 4)
     run.controller.ahk(KB.Enter, 2)
     run.controller.ahk(GB.Menu, delay=0)
-
+def select_unarmed():
+    binding=load_config()
+    run.controller.press(KeyCode.from_char(binding.get("unarmed")))
+    run.controller.press(KeyCode.from_char(binding.get("special_weapon")))
+    run.controller.release(KeyCode.from_char(binding.get("special_weapon")))
+    run.controller.release(KeyCode.from_char(binding.get("unarmed")))
+def press_weapon_wheel():
+    run.controller.press_and_release(keyboard.Key)
+    # run.controller.press()
 def suspend_gta():
     run.gta5.suspend()
 def kill_gta():
     run.gta5.kill()
     reload_app()
+def press_weapon_wheel():
+    run.controller.press_and_release()
     
 def exit_app():
     run.icon.stop()

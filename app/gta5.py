@@ -1,5 +1,5 @@
 from time import sleep
-from conf.config import PROCESS, GTA
+from config.config import PROCESS, GTA
 from .tools.process import *
 
 class GTA5():

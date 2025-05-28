@@ -15,6 +15,20 @@ class App:
     reload_app = Key.f6
     limit_net = Key.f7
     block_net = Key.f8
+    unarmed = 1
+    melee = 2
+    shotgun = 3
+    heavy_weapon = 4
+    special_weapon = 5
+    pistol = 6
+    smg = 7
+    assault_rifle = 8
+    sniper = 9
+    weapon_wheel = Key.insert
+    eat_snack = "-"
+    auto_close = False
+    hack_speed = Button.x2
+    select_unarmed = Button.x1
 
 
 class KeyBoard:
