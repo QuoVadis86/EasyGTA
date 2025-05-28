@@ -17,6 +17,5 @@
     "weapon_wheel": "Key.insert",
     "eat_snack": "-",
     "auto_close": "False",
-    "hack_speed": "Button.x2",
     "select_unarmed": "Button.x1"
 }

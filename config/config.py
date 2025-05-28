@@ -13,13 +13,25 @@ logging.basicConfig(
 GAME_NAME = "Grand Theft Auto V"
 GTA = "GTA5.exe"
 BE = "GTA5_BE.exe"
+GTA_ENHANCED = "GTA5_Enhanced.exe"
+BE_ENHANCED = "GTA5_Enhanced_BE.exe"
 LAUNCHER = "Launcher.exe"
 PLAY_GTA5 = "PlayGTAV.exe"
 ROCKSTAR_SERVICE = "RockstarService.exe"
 ERROR_HANDLER = "RockstarErrorHandler.exe"
 SC_HELPER = "SocialClubHelper.exe"
 
-PROCESS = [GTA, BE, LAUNCHER, PLAY_GTA5, ROCKSTAR_SERVICE, ERROR_HANDLER, SC_HELPER]
+PROCESS = [
+    GTA,
+    BE,
+    GTA_ENHANCED,
+    BE_ENHANCED,
+    LAUNCHER,
+    PLAY_GTA5,
+    ROCKSTAR_SERVICE,
+    ERROR_HANDLER,
+    SC_HELPER,
+]
 
 
 def get_external_config_path():
@@ -56,7 +68,7 @@ def init_config():
     return external_config
 
 
-def load_config()-> dict:
+def load_config() -> dict:
     """加载配置文件（始终读取外部配置）"""
     config_file = init_config()  # 确保配置已初始化
     logging.info(f"Loading config from {config_file}")
