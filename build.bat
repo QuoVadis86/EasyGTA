@@ -1,0 +1,1 @@
+ pyinstaller --name=EasyGTA --onefile --windowed --add-data "png\icon.png;png" --icon="png\icon.ico" main.py
