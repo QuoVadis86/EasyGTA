@@ -10,7 +10,8 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-GAME_NAME = "Grand Theft Auto V"
+GAME_NAME_LEGACY = "Grand Theft Auto V"
+GAME_NAME_ENHANCED = "Grand Theft Auto V"
 GTA = "GTA5.exe"
 BE = "GTA5_BE.exe"
 GTA_ENHANCED = "GTA5_Enhanced.exe"
