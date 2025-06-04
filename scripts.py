@@ -24,10 +24,12 @@ def select_unarmed():
     binding = load_config()
     special_weapon = run.listener.get_key(binding.get("special_weapon"))
     unarmed = run.listener.get_key(binding.get("unarmed"))
+    weapon_wheel = run.listener.get_key(binding.get("weapon_wheel"))
     run.controller.press(special_weapon)
     run.controller.press(unarmed)
     run.controller.release(unarmed)
     run.controller.release(special_weapon)
+    run.controller.press_and_release(weapon_wheel)
 
 
 def eat_snack():
